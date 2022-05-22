@@ -10,6 +10,7 @@ const SignUp = () => {
   const {user,signUp} = UserAuth()
 
   const handleSubmit = async (e)=>{
+    e.preventDefault()
     try{
       await signUp(email,password)
       redirect('/')

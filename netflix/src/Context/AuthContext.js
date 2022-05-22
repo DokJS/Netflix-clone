@@ -6,11 +6,17 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({children})=>{
     const [user, setUser] = useState({})
-    const signUp = (email,password)=>{
-        createUserWithEmailAndPassword(auth,email,password)
-        setDoc(doc(db,'users',email),{
-            savedShows: []
-        })
+    const signUp = async (email,password)=>{
+        try{
+            await createUserWithEmailAndPassword(auth, email, password)
+            await setDoc(doc(db, 'users', email), {
+                savedShows: []
+            })
+            console.log('utilisateur crée')
+        }catch(error){
+            console.log(error)
+        }
+       
     }
     const logOut = ()=> signOut(auth)
     const logIn = (email,password)=> signInWithEmailAndPassword(auth,email,password)
