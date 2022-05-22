@@ -7,6 +7,8 @@ import { AuthContextProvider } from './Context/AuthContext';
 import SignUp from './Pages/SignUp';
 import Account from './Pages/Account';
 import Login from './Pages/Login';
+import ComponentProtector from './Components/ComponentProtector';
+
 
 const App = ()=> {
 
@@ -18,7 +20,9 @@ const App = ()=> {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/account' element={<Account/>}/>
+        <Route path='/account' element={<ComponentProtector>
+          <Account/>
+        </ComponentProtector>}/>
       </Routes>
       </AuthContextProvider>
     </>
