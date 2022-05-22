@@ -9,14 +9,13 @@ const SignUp = () => {
   const [password, setPassword] = useState('')
   const {user,signUp} = UserAuth()
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
-    signUp(email,password).then(response=>{
+  const handleSubmit = async (e)=>{
+    try{
+      await signUp(email,password)
       redirect('/')
-    })
-    .catch(error=>{
+    }catch(error){
       console.log(error)
-    })
+    }
   }
   return (
     <>

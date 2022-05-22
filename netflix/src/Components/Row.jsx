@@ -34,7 +34,7 @@ const slideRight = ()=>{
         <div id={`slider${rowId}`} className=' w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
         {
             movies?.map((movie,index)=>(
-                <Movie key={index} url={`${STARTPATH}/${movie?.backdrop_path}`} title={movie?.title}/>
+                <Movie key={index} url={`${STARTPATH}/${movie?.backdrop_path}`} title={movie?.title} id={movie?.id}/>
             ))
         }
         </div>

@@ -1,9 +1,29 @@
 import React,{useState} from 'react';
 import PropTypes from 'prop-types'
 import {FaHeart,FaRegHeart} from 'react-icons/fa'
+import {UserAuth} from '../Context/AuthContext';
+import { db } from '../firebase';
+import { arrayUnion,doc,updateDoc } from 'firebase/firestore';
 
-const Movie = ({url,title}) => {
+const Movie = ({url,title,id}) => {
+    const {user} = UserAuth()
     const [like, setLike] = useState(false)
+    const [saved, setSaved] = useState(false)
+    const movieID = doc(db,'users',`${user?.email}`)
+
+    const saveMovie = async ()=>{
+        if(user?.email){
+            await updateDoc(movieID,{
+                saveShows: arrayUnion({
+                    id:id,
+                    title:title,
+                    img:url
+                })
+            })
+        }else {
+            alert('please log in to save a movie !')
+        }
+    }
     return (
         <div className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2'>
             <img src={url} alt={title} className='h-auto w-full block' />
