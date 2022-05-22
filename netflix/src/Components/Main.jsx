@@ -5,6 +5,7 @@ import requests from '../Requests';
 const Main = () => {
     const [movies, setMovies] = useState([])
     const movie = movies[Math.floor(Math.random()* movies.length)]
+
     useEffect(()=>{
         axios.get(requests.requestPopular)
         .then(response =>{
@@ -15,7 +16,8 @@ const Main = () => {
         })
     },[])
   console.log(movies);
-  const truncString = (string,number)=>{
+
+  const truncateString = (string,number)=>{
   if(string?.length > number){
       const stringArr = string.split('');
       return `${stringArr.slice(0,number).join('')}...`
@@ -23,6 +25,7 @@ const Main = () => {
       return string
   }
   }
+
   return  (
     <div className='w-full h-[550px] text-white relative'>
         <div className='w-full h-[550px] z-10 absolute bg-gradient-to-r from-black'></div>
@@ -36,7 +39,7 @@ const Main = () => {
                 <button className='bg-transparent border-gray-300 border-[1px] tracking-wider text-xs px-4 py-2 capitalize'>Watch Later</button>
             </div>
             <span className='block text-gray-500 opacity-75'>Released {movie?.release_date}</span>
-            <p className=' text-gray-200 w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%]'>{truncString(movie?.overview,150)}</p>
+            <p className=' text-gray-200 w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%]'>{truncateString(movie?.overview,150)}</p>
         </div>
     </div>
   )
